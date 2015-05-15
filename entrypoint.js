@@ -1,6 +1,5 @@
 
 var GitHubApi = require('github');
-var crypto = require('crypto'); /* for sha1 */
 
 var github = new GitHubApi({
   version: '3.0.0',
@@ -50,7 +49,6 @@ github.releases.listReleases({
           if(current != latest){
             var new_env = matches[0].replace(current, latest);
             var new_dockerfile = dockerfile.replace(matches[0], new_env);
-            var shasum = crypto.createHash('sha1');
             github.authenticate({
               type: 'basic',
               username: USER,
