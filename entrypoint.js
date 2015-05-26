@@ -58,7 +58,7 @@ github.releases.listReleases({
               user: USER,
               repo: REPO_DST,
               path: 'Dockerfile',
-              message: ENV + '=' + latest + ' (autobump)',
+              message: '[AUTO] ' + ENV + ' set to ' + latest + ' (autobump)',
               content: new Buffer(new_dockerfile).toString('base64'),
               sha: content.sha
             }, function(error, result){
