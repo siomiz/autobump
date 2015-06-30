@@ -13,8 +13,8 @@ var TARGET = process.env.TARGET || '';
 var ENV = process.env.ENV || '';
 var TOKEN = process.env.TOKEN || false;
 
-if(!/^\w+\/\w+$/.test(SOURCE)) throw new Error('-e SOURCE=<user>/<repo> is required');
-if(!/^\w+\/\w+$/.test(TARGET)) throw new Error('-e TARGET=<user>/<repo> is required');
+if(!/^[\w\-\.]+\/[\w\-\.]+$/.test(SOURCE)) throw new Error('-e SOURCE=<user>/<repo> is required');
+if(!/^[\w\-\.]+\/[\w\-\.]+$/.test(TARGET)) throw new Error('-e TARGET=<user>/<repo> is required');
 if(!/^\w+$/.test(ENV)) throw new Error('-e ENV=<env> is required')
 
 var OWNER = SOURCE.split('/')[0];
