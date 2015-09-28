@@ -27,11 +27,19 @@ github.releases.listReleases({
   owner: OWNER,
   repo: REPO_SRC,
   page: 1,
-  per_page: 1
+  per_page: 30
 }, function(error, releases){
   if(error) throw error;
   if(releases.length){
-    var latest = releases[0].tag_name;
+    var idx = 0;
+    while(idx < releases.length && releases[idx].prerelease){
+      idx++;
+    }
+    if(idx == releases.length){
+      /* all releases on the first page are pre-releases (really?), pick the latest */
+      idx = 0;
+    }
+    var latest = releases[idx].tag_name;
     console.log('Latest : ' + latest);
     github.repos.getContent({
       user: USER,
@@ -64,7 +72,7 @@ github.releases.listReleases({
             }, function(error, result){
               if(error) throw error;
               if('content' in result){
-                console.log('Commit : ' + result.content.commit.sha);
+                console.log('Commit : ' + result.content.sha);
               }
             });
           }else{
